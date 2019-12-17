@@ -1,10 +1,10 @@
 # rails-api-template
 A simple rails-api template to get up and running with a rails + doorkeeper + devise + rspec
 
-To run this simply download and do the following in a terminal
-`rails new yout-app-name-api -m ~/api-template.rb --api`
+To run this simply download and do the following in a terminal   
+`rails new your-app-name-api -m ~/api-template.rb --api`
 
-I also have a file that sets the following commands by default
+I also have a file that sets the following commands by default   
 `-d postgresql`
 `--skip-test` Because I install rspec in the template
 
