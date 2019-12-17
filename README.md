@@ -1,5 +1,5 @@
 # rails-api-template
-A simple rails-api template to get up and running with a rails + doorkeeper + devise + rspec
+A simple rails-api template to get up and running with a rails + [doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) + [devise](https://github.com/plataformatec/devise) + [jsonapi-resources](https://github.com/cerebris/jsonapi-resources) + [rspec](https://github.com/rspec/rspec-rails)
 
 To run this simply download and do the following in a terminal   
 `rails new your-app-name-api -m ~/api-template.rb --api`
