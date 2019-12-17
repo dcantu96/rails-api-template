@@ -1,12 +1,12 @@
 gem 'devise'
 gem 'doorkeeper'
-gem 'faker'
 gem 'jsonapi-resources'
 gem 'rack-cors'
 gem 'pry'
 
 gem_group :development, :test do
   gem 'rspec-rails'
+  gem 'ffaker'
 end
 
 run 'bundle install'
@@ -32,40 +32,40 @@ end
 rails_command 'db:migrate'
 
 file 'app/models/user.rb', <<-CODE, force: true
-  class User < ApplicationRecord
-    devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :validatable
-    has_many :access_grants,
-            class_name: 'Doorkeeper::AccessGrant',
-            foreign_key: :resource_owner_id,
-            dependent: :delete_all # or :destroy if you need callbacks
-    has_many :access_tokens,
-            class_name: 'Doorkeeper::AccessToken',
-            foreign_key: :resource_owner_id,
-            dependent: :delete_all # or :destroy if you need callbacks
-    validates :first_name, presence: true
-    validates :last_name, presence: true
-  
-    def generate_password_token!
-      self.reset_password_token = generate_token
-      self.reset_password_sent_at = Time.now.utc
-      save!
-    end
-    
-    def password_token_valid?
-      (self.reset_password_sent_at + 4.hours) > Time.now.utc
-    end
-  
-    def self.admins
-      User.where(admin: true)
-    end
-    
-    private
-    
-    def generate_token
-      SecureRandom.hex(10)
-    end
-  end  
+class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+        :recoverable, :rememberable, :validatable
+  has_many :access_grants,
+          class_name: 'Doorkeeper::AccessGrant',
+          foreign_key: :resource_owner_id,
+          dependent: :delete_all # or :destroy if you need callbacks
+  has_many :access_tokens,
+          class_name: 'Doorkeeper::AccessToken',
+          foreign_key: :resource_owner_id,
+          dependent: :delete_all # or :destroy if you need callbacks
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
+  def generate_password_token!
+    self.reset_password_token = generate_token
+    self.reset_password_sent_at = Time.now.utc
+    save!
+  end
+
+  def password_token_valid?
+    (self.reset_password_sent_at + 4.hours) > Time.now.utc
+  end
+
+  def self.admins
+    User.where(admin: true)
+  end
+
+  private
+
+  def generate_token
+    SecureRandom.hex(10)
+  end
+end  
 CODE
 
 file 'config/initializers/doorkeeper.rb', <<-CODE, force: true
