@@ -37,6 +37,13 @@ rails_command 'db:migrate'
 
 puts 'Init rolify install'
 generate 'rolify Role User'
+index_migration_array = Dir['db/migrate/*_rolify_create_roles.rb']
+index_migration_file = index_migration_array.first
+in_root do 
+  insert_into_file index_migration_file,
+                   '[6.0]',
+                   after: 'class RolifyCreateRoles < ActiveRecord::Migration'
+end
 rails_command 'db:migrate'
 file 'app/models/user.rb', <<-CODE, force: true
 class User < ApplicationRecord
