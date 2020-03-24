@@ -1,3 +1,5 @@
+### custom-templates
+
 # rails-api-template
 A simple rails-api template to get up and running with a rails + [doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) + [devise](https://github.com/plataformatec/devise) + [jsonapi-resources](https://github.com/cerebris/jsonapi-resources) + [rspec](https://github.com/rspec/rspec-rails) + rolify (optional)
 
@@ -15,3 +17,8 @@ So if you dont have these by default use this command instead
 `rails new your-app-name-api -m ~/api-template.rb --api -d postgresql --skip-test`   
 
 Doorkeeper will set access token expiration to 1 hour and will also return a refresh token when requesting access (log in) on your front end. I advise to use [Kitsu](https://github.com/wopian/kitsu/tree/master/packages/kitsu) to interact with this api and formulate a strategy on your front end to store and request another access token using the refresh token stored. I created a basic template with react that works with the rails-api-rolify template.
+
+# react-js-template
+
+To run the react js template with roles simply download the `react-js-redux-auth` folder and run the following in terminal  
+`npx create-react-app your-app-name-api --template file:/path/to/react/template/folder`
